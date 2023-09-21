@@ -1,8 +1,0 @@
-version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
-options: "dd7cc6c7d8237ff3ad546cfe7e6d3fa593a2632d52c54451c7efd8733e10795f"
-build_start_time: [1694178144, 834509000]
-build_end_time: [1694178160, 535194000]
-inputs:
-  "/Users/mac/but flutter/Demo_figma/macos/Flutter/GeneratedPluginRegistrant.swift": [1694178078, 350937468]
-  "/Users/mac/but flutter/Demo_figma/macos/Runner/AppDelegate.swift": [1686756980, 0]
-  "/Users/mac/but flutter/Demo_figma/macos/Runner/MainFlutterWindow.swift": [1688912994, 776319265]

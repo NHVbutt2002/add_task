@@ -1,6 +1,6 @@
 {
-    "name": "myappfigma",
-    "short_name": "myappfigma",
+    "name": "create_task",
+    "short_name": "create_task",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

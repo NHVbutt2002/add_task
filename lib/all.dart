@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'package:create_task/home.dart';
 
 import 'package:create_task/model/todo_list.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +20,8 @@ class _AllState extends State<All> {
     });
   }
 
-  final List<TodoModel> listTodo = [];
   TextEditingController title = TextEditingController();
-  var isCheckbox = false;
-
+  bool isCheckbox = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +52,7 @@ class _AllState extends State<All> {
                                   activeColor: Colors.blue,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      value = !isCheckbox;
+                                      isCheckbox = value!;
                                     });
                                   },
                                 );
@@ -71,7 +69,18 @@ class _AllState extends State<All> {
                               onPressed: () {
                                 Navigator.of(context).pop();
                                 setState(() {
-                                  listTodo.add(TodoModel(title: title.text));
+                                  listTodo.add(TodoModel(
+                                      title: title.text,
+                                      isCheckbox: isCheckbox));
+                                  if (isCheckbox == false) {
+                                    listcomplete.add(TodoModel(
+                                        title: title.text,
+                                        isCheckbox: isCheckbox));
+                                  } else {
+                                    incomplete.add(TodoModel(
+                                        title: title.text,
+                                        isCheckbox: isCheckbox));
+                                  }
                                 });
                               },
                             ),
@@ -88,55 +97,55 @@ class _AllState extends State<All> {
                 ),
               ),
               Expanded(
-                  child: ListView.builder(
-                      itemCount: listTodo.length,
-                      shrinkWrap: true,
-                      itemBuilder: (ctx, i) {
-                        final item = listTodo[i];
-                        return InkWell(
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (ctx) {
-                                  return AlertDialog(
-                                    title: Text("Bạn có muốn xóa Job "),
-                                    actions: [
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              listTodo.removeAt(i);
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text("Ok"))
-                                    ],
-                                  );
-                                });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '${listTodo[i].title}',
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Checkbox(
-                                    value: listTodo[i].isCheckbox,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        value = !listTodo[i].isCheckbox;
-                                      });
-                                    },
-                                  )
-                                ]),
-                          ),
-                        );
-                      })),
+                child: ListView.builder(
+                  itemCount: listTodo.length,
+                  shrinkWrap: true,
+                  itemBuilder: (ctx, i) {
+                    final item = listTodo[i];
+                    return InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) {
+                              return AlertDialog(
+                                title: Text("Bạn có muốn xóa Job "),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          listTodo.removeAt(i);
+                                        });
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Ok"))
+                                ],
+                              );
+                            });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '${listTodo[i].title}',
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              Checkbox(
+                                value: listTodo[i].isCheckbox,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    listTodo[i].isCheckbox = value!;
+                                  });
+                                },
+                              )
+                            ]),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
